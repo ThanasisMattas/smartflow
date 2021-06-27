@@ -29,7 +29,8 @@ requirements:
     - mattflow >=1.3.4
     - pandas >=1.1.3
     - pillow
-    - scipy >=1.5.2
+    - scipy >=1.5.3
+    - scikit-learn >=0.24.2
 
 about:
   license: GPL3+

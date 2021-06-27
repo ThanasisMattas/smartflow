@@ -1,22 +1,25 @@
 # SmartFlow
 
-A Deep Learning solver for the Shallow Water Equations.
-___
+A Deep Learning solver for the Shallow Water Equations
 
-SmartFlow is an extend of [MattFlow], which is a 2-stage [Runge-Kutta] numerical
-solver for the [Shallow Water Equations] (SWE). SmartFlow implements some Deep
-Learning architectures out of the corresponding papers. The models are trained
-on data produced by MattFlow, aiming is to predict the successive states of the
-fluid.
+<br />
 
-| requirements         |
-| -------------------- |
-| python3              |
-| tensorflow >= 2.2.0  |
-| numpy >= 1.19.2      |
-| matplotlib >= 3.3.2  |
-| mattflow >= 1.3.4    |
-| pandas >= 1.1.3      |
+SmartFlow is an extend of [MattFlow], which is a 2-stage [Runge-Kutta]
+numerical solver for the [Shallow Water Equations] (SWE). SmartFlow implements
+some Deep Learning architectures out of the corresponding papers. The models
+are trained on data produced by MattFlow, aiming to predict the successive
+states of the fluid.
+
+| requirements           |
+| ---------------------- |
+| python3                |
+| tensorflow >= 2.2.0    |
+| numpy >= 1.19.2        |
+| matplotlib >= 3.3.2    |
+| mattflow >= 1.3.4      |
+| pandas >= 1.1.3        |
+| scikit-learn >= 0.24.2 |
+| scipy >= 1.5.3         |
 
 ## Install
 
@@ -49,9 +52,9 @@ a cell of the mesh and each channel to a state variable.
 ## Reference papers
 
 * He, K., Zhang, X., Ren, S., Sun, J. *Deep Residual Learning for Image Recognition*. 2015. arXiv: [1512.03385].
+* Szegedy, S., Vanhoucke, V., Ioffe, S., Shlens, J., Wojna, Z. *Rethinking the Inception Architecture for Computer Vision*. 2015. arXiv:[1512.00567].
 * Szegedy, C., Ioffe, S., Vanhoucke, V., Alemi, A. *Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning*. 2016. arXiv: [1512.00567].
 * Ioffe, S., Szegedy, C. *Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift*. 2015. arXiv: [1502.03167].
-* Szegedy, S., Vanhoucke, V., Ioffe, S., Shlens, J., Wojna, Z. *Rethinking the Inception Architecture for Computer Vision*. 2015. arXiv:[1512.00567].
 
 ## License
 

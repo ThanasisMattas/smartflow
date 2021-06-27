@@ -11,8 +11,9 @@ REQUIRED = [
   'numpy>=1.18.5',
   'pandas>=1.1.3',
   'pillow',
-  'scipy>=1.5.2',
-  'tensorflow>=2.3.0'
+  'scipy>=1.5.3',
+  'tensorflow>=2.3.0',
+  'scikit-learn>=0.24.2'
 ]
 
 EXTRAS = {
