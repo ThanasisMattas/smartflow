@@ -74,17 +74,6 @@ batch at a time from a numpy memmap.
 will be deployed on the google colab cloud.
 * Derived from SmartFlowDs and tf.data.Dataset
 
-### Preprocessing vis
-
-Checking that:
-
-* Flip and rotation orientation of input and ground truth are coherent.
-* Examples with new-drop-frames as labels are removed, because it is not
-possible to infer where and when a new drop will fall.
-* Input is normalized.
-
-<img src="preprocessing_visualizations/it_00203_Flux-y.png" width=800>
-
 ## Preprocessing
 
 ### Normalization (mean - std)
@@ -97,6 +86,17 @@ possible to infer where and when a new drop will fall.
 
 * Per frame or batch
 * Channelwise or using the whole volume
+
+### Visualization
+
+Checking that:
+
+* Flip and rotation orientation of input and ground truth are coherent.
+* Examples with new-drop-frames as labels are removed, because it is not
+possible to infer where and when a new drop will fall.
+* Input is normalized.
+
+<img src="preprocessing_visualizations/it_00203_Flux-y.png" width=800>
 
 ## Model
 
