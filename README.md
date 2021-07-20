@@ -5,10 +5,14 @@ A Deep Learning solver for the Shallow Water Equations
 <br />
 
 SmartFlow is an extension of [MattFlow], which is a 2-stage [Runge-Kutta]
-numerical solver for the [Shallow Water Equations] (SWE). SmartFlow comprises
+numerical solver for the [Shallow Water Equations] (SWE). The project comprises
 the implementation of Deep Learning architectures out of the corresponding
 papers. The models are trained on data produced by MattFlow, aiming to predict
 the successive states of the fluid.
+
+[SWE] is a simplified Computational Fluid Dynamics (CFD) problem, which models
+the surface of the water with the assumption that the horizontal length scale
+is much greater than the vertical length scale.
 
 | requirements           |
 | ---------------------- |
@@ -31,7 +35,7 @@ $ pip install smartflow
 $ git clone https://github.com/ThanasisMattas/smartflow.git
 ```
 
-## Input - Prediction - Ground Truth
+## Input - Prediction - Ground Truth example
 
 <img src="input-pred-gt_visualizations/it_00364.png" width=800>
 
@@ -46,7 +50,7 @@ a cell of the mesh and each channel to a state variable.
 
 ## Dataset types
 
-### SmartFlowDS
+### [SmartFlowDS]
 
 Base class for SmartFlow datasets
 - Both NCHW and NHWC formats are supported
@@ -62,13 +66,13 @@ Base class for SmartFlow datasets
   as input.
 - Data augmentation: (link) Random flip, rotate and shuffle of the train batch.
 
-### DSequence
+### [DSequence]
 
 * Used when training on GPU or when the dataset does not fit into the memory.
 * Derived from SmartFlowDS and keras.utils.Sequence, in order to load one
 batch at a time from a numpy memmap.
 
-### Dset
+### [Dset]
 
 * This subclass is preferred when the dataset does fit into the memory or TPUs
 will be deployed on the google colab cloud.
@@ -78,8 +82,8 @@ will be deployed on the google colab cloud.
 
 ### Normalization (mean - std)
 
-* On-devise, using normalization_layer().
-* On dataset creation, using the Normalizer class, ​sacrificing portability in
+* On-devise, using [normalization_layer()].
+* On dataset creation, using the [Normalizer] class, ​sacrificing portability in
   order to relieve the GPU while training.
 
 ### Stats type
@@ -96,11 +100,11 @@ Checking that:
 possible to infer where and when a new drop will fall.
 * Input is normalized.
 
-<img src="preprocessing_visualizations/it_00203_Flux-y.png" width=800>
+<img src="preprocessing_visualization/it_00203_Flux-y.png" width=800>
 
 ## Model
 
-### Setup
+### [Setup]
 
 **loss** MeanSquaredError<br />
 **metrics** MeanAbsoluteError<br />
@@ -108,7 +112,7 @@ possible to infer where and when a new drop will fall.
 **monitors** val_loss<br />
 **loss_weights** [0.2, 0.8] (When multiple heads i.e. Inception_v3)
 
-### Callbacks
+### [Callbacks]
 
 * checkpoint
 * earlystopping
@@ -141,12 +145,28 @@ possible to infer where and when a new drop will fall.
 >(C) 2021, Athanasios Mattas<br />
 >thanasismatt@gmail.com
 
-
 [//]: # "links"
 
+<!-- Intro -->
 [MattFlow]: <https://github.com/ThanasisMattas/mattflow>
 [Runge-Kutta]: <https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods>
 [Shallow Water Equations]: <https://en.wikipedia.org/wiki/Shallow_water_equations>
+[SWE]: <https://github.com/ThanasisMattas/mattflow#shallow-water-equations>
+
+<!-- Dataset -->
+[SmartFlowDS]: <https://github.com/ThanasisMattas/smartflow/blob/2aabd1e3ff426ff23fa62a9011df0bc63380120a/smartflow/smartflow_pre.py#L265>
+[DSequence]: <https://github.com/ThanasisMattas/smartflow/blob/2aabd1e3ff426ff23fa62a9011df0bc63380120a/smartflow/smartflow_pre.py#L547>
+[DSet]: <https://github.com/ThanasisMattas/smartflow/blob/2aabd1e3ff426ff23fa62a9011df0bc63380120a/smartflow/smartflow_pre.py#L680>
+
+<!-- Preprocessing -->
+[normalization_layer()]: <https://github.com/ThanasisMattas/smartflow/blob/2aabd1e3ff426ff23fa62a9011df0bc63380120a/smartflow/smartflow_pre.py#L84>
+[Normalizer]: <https://github.com/ThanasisMattas/smartflow/blob/2aabd1e3ff426ff23fa62a9011df0bc63380120a/smartflow/smartflow_pre.py#L103>
+
+<!-- Model -->
+[Setup]: <https://github.com/ThanasisMattas/smartflow/blob/2aabd1e3ff426ff23fa62a9011df0bc63380120a/smartflow/core.py#L149>
+[Callbacks]: <https://github.com/ThanasisMattas/smartflow/blob/2aabd1e3ff426ff23fa62a9011df0bc63380120a/smartflow/core.py#L67>
+
+<!-- Architectures -->
 [Inception-ResNet-v2]: <smartflow/archs/inception_resnet_v2.py>
 [Inception-v3]: <smartflow/archs/inception_v3.py>
 [Inception-ResNet-like]: <smartflow/archs/inception_resnet.py>
@@ -155,7 +175,7 @@ possible to infer where and when a new drop will fall.
 [Fully-Connected NN]: <smartflow/archs/fcnn.py>
 [GNU General Public License v3.0]: <https://github.com/ThanasisMattas/mattflow/blob/master/COPYING>
 
-
+<!-- References -->
 [1512.03385]: <https://arxiv.org/abs/1512.03385>
 [1512.00567]: <https://arxiv.org/abs/1512.00567>
 [1502.03167]: <https://arxiv.org/abs/1502.03167>
