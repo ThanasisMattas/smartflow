@@ -232,7 +232,7 @@ def time_this(f):
 
 
 def adjust_data_to_subset(data, drop_iters, subset, update_max_iters=True):
-  """Crops the data to te subset limits."""
+  """Crops the data to the subset limits."""
   start = subset[0]
   stop = subset[1]
   if update_max_iters:

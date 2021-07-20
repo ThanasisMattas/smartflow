@@ -22,10 +22,11 @@ from smartflow.utils import time_this
 
 
 def plot_loss(hist, save_fig=True, show_fig=False):
-  """plots loss vs epochs for train and val datasets
+  """Plots loss vs epochs for train and val datasets.
 
   Args:
     hist (History) : the returned History object of Model.fit()
+    save_fig, show_fig (bool)
   """
   plt.plot(hist.history['loss'], label='train_loss')
   try:

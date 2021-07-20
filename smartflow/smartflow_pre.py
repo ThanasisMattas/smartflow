@@ -90,7 +90,11 @@ def normalization_layer(**kwargs):
     **kwargs
   )
   # The layer's weights must be instantiated, before explicitly setting them.
-  dummy_adapter = np.full(input_shape, 1, dtype=S.dtype("numpy"))[np.newaxis, :]
+  dummy_adapter = np.full(
+      input_shape,
+      1,
+      dtype=S.dtype("numpy")
+  )[np.newaxis, :]
   NormalizationLayer.adapt(dummy_adapter)
   NormalizationLayer.set_weights(normalization_layer_weights())
   return NormalizationLayer
@@ -430,8 +434,8 @@ class SmartFlowDS:
     return x
 
   def _concatenate_multiple_x_frames(self, x):
-    """Concatenates the consecutive num_x_frames, which constitute the features of
-    each example.
+    """Concatenates the consecutive num_x_frames, which constitute the features
+    of each example.
 
     - Every training example will have concatenated <num_x_frames> frames.
     - The oldest frame goes last.

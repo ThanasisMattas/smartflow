@@ -4,11 +4,11 @@ A Deep Learning solver for the Shallow Water Equations
 
 <br />
 
-SmartFlow is an extend of [MattFlow], which is a 2-stage [Runge-Kutta]
-numerical solver for the [Shallow Water Equations] (SWE). SmartFlow implements
-some Deep Learning architectures out of the corresponding papers. The models
-are trained on data produced by MattFlow, aiming to predict the successive
-states of the fluid.
+SmartFlow is an extension of [MattFlow], which is a 2-stage [Runge-Kutta]
+numerical solver for the [Shallow Water Equations] (SWE). SmartFlow comprises
+the implementation of Deep Learning architectures out of the corresponding
+papers. The models are trained on data produced by MattFlow, aiming to predict
+the successive states of the fluid.
 
 | requirements           |
 | ---------------------- |
@@ -31,6 +31,10 @@ $ pip install smartflow
 $ git clone https://github.com/ThanasisMattas/smartflow.git
 ```
 
+## Input - Prediction - Ground Truth
+
+<img src="input-pred-gt_visualizations/it_00364.png" width=800>
+
 ## Dataset format
 
 Each data example is the state of the fluid at some time-step and the
@@ -39,6 +43,78 @@ corresponding label is the state at the next time-step. A state comprises a
 SWE, populating the discretized 2D domain. The main idea is that the state
 matrix can be regarded as a 3-channel image, where each pixel corresponds to
 a cell of the mesh and each channel to a state variable.
+
+## Dataset types
+
+### SmartFlowDS
+
+Base class for SmartFlow datasets
+- Both NCHW and NHWC formats are supported
+- Input frames have updated ghost cells, but labels don't (those cells will not
+  be predicted). Therefore, after inference the prediction will be padded
+  with ghost cells, before it is fed back to the model for the next prediction.
+  Boundary conditions are required by the numerical scheme and can be easily
+  evaluated upon inference, hopefully providing some valuable information to
+  the model.
+- Time-steps at which a drop fell cannot be used as labels, because there is
+  no way to infer when and where a new drop will fall, using information from
+  the previous state of the fluid. However, those frames can perfectly be used
+  as input.
+- Data augmentation: (link) Random flip, rotate and shuffle of the train batch.
+
+### DSequence
+
+* Used when training on GPU or when the dataset does not fit into the memory.
+* Derived from SmartFlowDS and keras.utils.Sequence, in order to load one
+batch at a time from a numpy memmap.
+
+### Dset
+
+* This subclass is preferred when the dataset does fit into the memory or TPUs
+will be deployed on the google colab cloud.
+* Derived from SmartFlowDs and tf.data.Dataset
+
+### Preprocessing vis
+
+Checking that:
+
+* Flip and rotation orientation of input and ground truth are coherent.
+* Examples with new-drop-frames as labels are removed, because it is not
+possible to infer where and when a new drop will fall.
+* Input is normalized.
+
+<img src="preprocessing_visualizations/it_00203_Flux-y.png" width=800>
+
+## Preprocessing
+
+### Normalization (mean - std)
+
+* On-devise, using normalization_layer().
+* On dataset creation, using the Normalizer class, ​sacrificing portability in
+  order to relieve the GPU while training.
+
+### Stats type
+
+* Per frame or batch
+* Channelwise or using the whole volume
+
+## Model
+
+### Setup
+
+**loss** MeanSquaredError<br />
+**metrics** MeanAbsoluteError<br />
+**optimizer** Adam with learning rate scheduler<br />
+**monitors** val_loss<br />
+**loss_weights** [0.2, 0.8] (When multiple heads i.e. Inception_v3)
+
+### Callbacks
+
+* checkpoint
+* earlystopping
+* tensorboard
+* learning rate schedule
+* garbage collector
 
 ## Architectures
 

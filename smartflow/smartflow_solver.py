@@ -71,7 +71,7 @@ def _predict(U, model, it, drops_count, Uprev=None):
 
 @time_this
 def simulate(model, iters=conf.MAX_ITERS, save_predictions=True):
-  """iteretively uses the current frame to predict the next one
+  """Iteretively uses the current frame to predict the next one.
 
   Args:
     model (Model)           : the trained model
@@ -82,7 +82,7 @@ def simulate(model, iters=conf.MAX_ITERS, save_predictions=True):
     h_hist (3D ndarray)     : the array of the predicted frames
                               (#iters, Nx, Ny)
     t_hist (ndarray)        : the array of the calculated timestamps of the
-                              frames (CFD condition)
+                              frames (CFL condition)
   """
   iters = min(iters, conf.MAX_ITERS)
   time = 0
