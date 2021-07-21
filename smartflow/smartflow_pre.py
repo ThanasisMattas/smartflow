@@ -295,12 +295,11 @@ class SmartFlowDS:
 
   @staticmethod
   def augment(x, y, rate=0.25, set_seed=None):
-    """Randomly flips, rotates and shuffles a train batch.
+    """Randomly flips and rotates a train batch.
 
     - Supports both NCHW and NHWC formats.
     - x and y are stacked together, in order to have the same flip status.
 
-    TODO: shuffle the whole train ds and disable shuffling here
     NOTE: Don't apply on validation and test datasets, in order to preserve a
           coherent reference.
 
