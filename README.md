@@ -10,9 +10,9 @@ the implementation of Deep Learning architectures out of the corresponding
 papers. The models are trained on data produced by MattFlow, aiming to predict
 the successive states of the fluid.
 
-[SWE] is a simplified Computational Fluid Dynamics (CFD) problem, which models
-the surface of the water with the assumption that the horizontal length scale
-is much greater than the vertical length scale.
+[SWE] is a Computational Fluid Dynamics (CFD) problem, which models the surface
+of the water and consists in a coupled system of three hyperbolic Partial
+Differential Equations (PDEs).
 
 | requirements           |
 | ---------------------- |
@@ -28,11 +28,11 @@ is much greater than the vertical length scale.
 ## Install
 
 ```shell
-$ pip install smartflow
+pip install smartflow
 ```
 
 ```shell
-$ git clone https://github.com/ThanasisMattas/smartflow.git
+git clone https://github.com/ThanasisMattas/smartflow.git
 ```
 
 ## Input - Prediction - Ground Truth example
@@ -44,27 +44,42 @@ $ git clone https://github.com/ThanasisMattas/smartflow.git
 Each data example is the state of the fluid at some time-step and the
 corresponding label is the state at the next time-step. A state comprises a
 3D matrix, U, where the *channel* axis consists of the 3 state variables of the
-SWE, populating the discretized 2D domain. The main idea is that the state
-matrix can be regarded as a 3-channel image, where each pixel corresponds to
-a cell of the mesh and each channel to a state variable.
+SWE, surface height, flux-x and flux-y, populating the discretized 2D domain.
+The main idea is that the state matrix can be regarded as a 3-channel image,
+where each pixel corresponds to a cell of the mesh and each channel to a state
+variable.
+
+### Input data scenarios
+
+* A single frame (one time-step)
+* 2 frames (in order to give the model the opportunity to form gradients)
+* Only the surface height channel
+* All 3 channels
+* With/without updating boundary conditions
+* Different sizes and frequency of water drops.
+
+The best performance occurred with 2 frames, all 3 channels, updating BC and
+using the highest grid resolution, meaning that there is no redundant
+information at this point.
 
 ## Dataset types
 
 ### [SmartFlowDS]
 
 Base class for SmartFlow datasets
-- Both NCHW and NHWC formats are supported
-- Input frames have updated ghost cells, but labels don't (those cells will not
+
+* Both NCHW and NHWC formats are supported
+* Input frames have updated ghost cells, but labels don't (those cells will not
   be predicted). Therefore, after inference the prediction will be padded
   with ghost cells, before it is fed back to the model for the next prediction.
   Boundary conditions are required by the numerical scheme and can be easily
   evaluated upon inference, hopefully providing some valuable information to
   the model.
-- Time-steps at which a drop fell cannot be used as labels, because there is
+* Time-steps at which a drop fell cannot be used as labels, because there is
   no way to infer when and where a new drop will fall, using information from
   the previous state of the fluid. However, those frames can perfectly be used
   as input.
-- Data augmentation: (link) Random flip, rotate and shuffle of the train batch.
+* Data augmentation: (link) Random flip, rotate and shuffle of the train batch.
 
 ### [DSequence]
 
@@ -72,7 +87,7 @@ Base class for SmartFlow datasets
 * Derived from SmartFlowDS and keras.utils.Sequence, in order to load one
 batch at a time from a numpy memmap.
 
-### [Dset]
+### [DSet]
 
 * This subclass is preferred when the dataset does fit into the memory or TPUs
 will be deployed on the google colab cloud.
@@ -131,10 +146,16 @@ possible to infer where and when a new drop will fall.
 
 ## Reference papers
 
-* He, K., Zhang, X., Ren, S., Sun, J. *Deep Residual Learning for Image Recognition*. 2015. arXiv: [1512.03385].
-* Szegedy, S., Vanhoucke, V., Ioffe, S., Shlens, J., Wojna, Z. *Rethinking the Inception Architecture for Computer Vision*. 2015. arXiv:[1512.00567].
-* Szegedy, C., Ioffe, S., Vanhoucke, V., Alemi, A. *Inception-v4, Inception-ResNet and the Impact of Residual Connections on Learning*. 2016. arXiv: [1512.00567].
-* Ioffe, S., Szegedy, C. *Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift*. 2015. arXiv: [1502.03167].
+* He, K., Zhang, X., Ren, S., Sun, J. *Deep Residual Learning for Image
+  Recognition*. 2015. arXiv: [1512.03385].
+* Szegedy, S., Vanhoucke, V., Ioffe, S., Shlens, J., Wojna, Z. *Rethinking the
+  Inception Architecture for Computer Vision*. 2015. arXiv:[1512.00567].
+* Szegedy, C., Ioffe, S., Vanhoucke, V., Alemi, A.
+  *Inception-v4, Inception-ResNet and the Impact of Residual Connections on
+  Learning*. 2016. arXiv: [1512.00567].
+* Ioffe, S., Szegedy, C.
+  *Batch Normalization: Accelerating Deep Network Training by Reducing*
+  *Internal Covariate Shift*. 2015. arXiv: [1502.03167].
 
 ## License
 
