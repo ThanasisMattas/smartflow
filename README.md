@@ -79,7 +79,7 @@ Base class for SmartFlow datasets
   no way to infer when and where a new drop will fall, using information from
   the previous state of the fluid. However, those frames can perfectly be used
   as input.
-* Data augmentation: (link) Random flip, rotate and shuffle of the train batch.
+* Data [augmentation]: Random flip, rotate and shuffle of the train batch.
 
 ### [DSequence]
 
@@ -97,7 +97,7 @@ will be deployed on the google colab cloud.
 
 ### Normalization (mean - std)
 
-* On-devise, using [normalization_layer()].
+* On-devise, using the [normalization_layer()].
 * On dataset creation, using the [Normalizer] class, ​sacrificing portability in
   order to relieve the GPU while training.
 
@@ -111,6 +111,7 @@ will be deployed on the google colab cloud.
 Checking that:
 
 * Flip and rotation orientation of input and ground truth are coherent.
+* Input dataset is shuffled.
 * Examples with new-drop-frames as labels are removed, because it is not
 possible to infer where and when a new drop will fall.
 * Input is normalized.
@@ -176,6 +177,7 @@ possible to infer where and when a new drop will fall.
 
 <!-- Dataset -->
 [SmartFlowDS]: <https://github.com/ThanasisMattas/smartflow/blob/2aabd1e3ff426ff23fa62a9011df0bc63380120a/smartflow/smartflow_pre.py#L265>
+[augmentation]: <https://github.com/ThanasisMattas/smartflow/blob/198514cd843e803ce9c95ab814ff58bf6401bd9d/smartflow/smartflow_pre.py#L297>
 [DSequence]: <https://github.com/ThanasisMattas/smartflow/blob/2aabd1e3ff426ff23fa62a9011df0bc63380120a/smartflow/smartflow_pre.py#L547>
 [DSet]: <https://github.com/ThanasisMattas/smartflow/blob/2aabd1e3ff426ff23fa62a9011df0bc63380120a/smartflow/smartflow_pre.py#L680>
 
