@@ -66,7 +66,7 @@ information at this point.
 
 30 frames every 1000 frames
 
-<img src="media/dataset_preview.gif" width=420>
+<img src="media/dataset_preview.gif" width=360>
 
 ## Dataset types
 
