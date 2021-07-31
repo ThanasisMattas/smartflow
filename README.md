@@ -11,8 +11,8 @@ papers. The models are trained on data produced by MattFlow, aiming to predict
 the successive states of the fluid.
 
 [SWE] is a Computational Fluid Dynamics (CFD) problem, which models the surface
-of the water and consists in a coupled system of three hyperbolic Partial
-Differential Equations (PDEs).
+of the water via a coupled system of three hyperbolic Partial Differential
+Equations (PDEs).
 
 | requirements           |
 | ---------------------- |
@@ -37,7 +37,7 @@ git clone https://github.com/ThanasisMattas/smartflow.git
 
 ## Input - Prediction - Ground Truth example
 
-<img src="input-pred-gt_visualizations/it_00364.png" width=800>
+<img src="media/input-pred-gt_visualizations/it_00364.png" width=800>
 
 ## Dataset format
 
@@ -61,6 +61,12 @@ variable.
 The best performance occurred with 2 frames, all 3 channels, updating BC and
 using the highest grid resolution, meaning that there is no redundant
 information at this point.
+
+### Dataset Preview
+
+30 frames every 1000 frames
+
+<img src="media/dataset_preview.gif" width=420>
 
 ## Dataset types
 
@@ -116,7 +122,7 @@ Checking that:
 possible to infer where and when a new drop will fall.
 * Input is normalized.
 
-<img src="preprocessing_visualization/it_00203_Flux-y.png" width=800>
+<img src="media/preprocessing_visualization/it_00203_Flux-y.png" width=800>
 
 ## Model
 
