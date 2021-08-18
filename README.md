@@ -45,9 +45,9 @@ Each data example is the state of the fluid at some time-step and the
 corresponding label is the state at the next time-step. A state comprises a
 3D matrix, U, where the *channel* axis consists of the 3 state variables of the
 SWE, surface height, flux-x and flux-y, populating the discretized 2D domain.
-The main idea is that the state matrix can be regarded as a 3-channel image,
+**The main idea is that the state matrix can be regarded as a 3-channel image,
 where each pixel corresponds to a cell of the mesh and each channel to a state
-variable.
+variable**.
 
 ### Input data scenarios
 
@@ -90,14 +90,14 @@ Base class for SmartFlow datasets
 ### [DSequence]
 
 * Used when training on GPU or when the dataset does not fit into the memory.
-* Derived from SmartFlowDS and keras.utils.Sequence, in order to load one
+* Derived from ```SmartFlowDS``` and ```keras.utils.Sequence```, in order to load one
 batch at a time from a numpy memmap.
 
 ### [DSet]
 
 * This subclass is preferred when the dataset does fit into the memory or TPUs
 will be deployed on the google colab cloud.
-* Derived from SmartFlowDs and tf.data.Dataset
+* Derived from ```SmartFlowDs``` and ```tf.data.Dataset```.
 
 ## Preprocessing
 
