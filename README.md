@@ -14,7 +14,7 @@ the successive states of the fluid.
 of the water via a coupled system of three hyperbolic Partial Differential
 Equations (PDEs).
 
-| requirements           |
+| Requirements           |
 | ---------------------- |
 | python3                |
 | tensorflow >= 2.2.0    |
@@ -24,6 +24,18 @@ Equations (PDEs).
 | pandas >= 1.1.3        |
 | scikit-learn >= 0.24.2 |
 | scipy >= 1.5.3         |
+
+## Contents
+
+* [Install](#install)
+* [Input - Prediction - Ground Truth](#input---prediction---ground-truth-example)
+* [Dataset format](#dataset-format)
+* [Dataset types](#dataset-types)
+* [Preprocessing](#preprocessing)
+* [Model](#model)
+* [Architectures](#architectures)
+* [Reference papers](#reference-papers)
+* [License](#license)
 
 ## Install
 
@@ -52,21 +64,21 @@ variable**.
 ### Input data scenarios
 
 * A single frame (one time-step)
-* 2 frames (in order to give the model the opportunity to form gradients)
+* 2 frames (in order to give the model the opportunity to learn gradients)
 * Only the surface height channel
 * All 3 channels
 * With/without updating boundary conditions
 * Different sizes and frequency of water drops.
 
-The best performance occurred with 2 frames, all 3 channels, updating BC and
+**The best performance occurred with 2 frames, all 3 channels, updating BC and
 using the highest grid resolution, meaning that there is no redundant
-information at this point.
+information at this point.**
 
 ### Dataset Preview
 
 30 frames every 1000 frames
 
-<img src="media/dataset_preview.gif" width=360>
+<img src="media/dataset_preview.gif" width=400>
 
 ## Dataset types
 
