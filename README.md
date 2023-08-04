@@ -5,12 +5,12 @@ A Deep Learning solver for the Shallow Water Equations
 <br />
 
 SmartFlow is an extension of [MattFlow], which is a 2-stage [Runge-Kutta]
-numerical solver for the [Shallow Water Equations] (SWE). The project comprises
+numerical solver for the [Shallow Water Equations] (SWE)*. The project comprises
 the implementation of Deep Learning architectures out of the corresponding
 papers. The models are trained on data produced by MattFlow, aiming to predict
 the successive states of the fluid.
 
-[SWE] is a Computational Fluid Dynamics (CFD) problem, which models the surface
+\*[SWE] is a Computational Fluid Dynamics (CFD) problem, which models the surface
 of the water via a coupled system of three hyperbolic Partial Differential
 Equations (PDEs).
 
