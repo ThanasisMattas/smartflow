@@ -93,7 +93,7 @@ Base class for SmartFlow datasets
   Boundary conditions are required by the numerical scheme and can be easily
   evaluated upon inference, hopefully providing some valuable information to
   the model.
-* Time-steps at which a drop fell cannot be used as labels, because there is
+* Time-steps at which a drop falls cannot be used as labels, because there is
   no way to infer when and where a new drop will fall, using information from
   the previous state of the fluid. However, those frames can perfectly be used
   as input.
