@@ -196,7 +196,7 @@ possible to infer where and when a new drop will fall.
 <br />
 
 >(C) 2021, Athanasios Mattas<br />
->thanasismatt@gmail.com
+><thanasismatt@gmail.com>
 
 [//]: # "links"
 
