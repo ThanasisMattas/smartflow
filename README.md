@@ -233,4 +233,3 @@ possible to infer where and when a new drop will fall.
 [1512.03385]: <https://arxiv.org/abs/1512.03385>
 [1512.00567]: <https://arxiv.org/abs/1512.00567>
 [1502.03167]: <https://arxiv.org/abs/1502.03167>
-[1512.00567]: <https://arxiv.org/abs/1512.00567>
