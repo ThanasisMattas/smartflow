@@ -76,12 +76,12 @@ variable**.
 
 ### Input data scenarios
 
-* A single frame (one time-step)
-* 2 frames (in order to give the model the opportunity to learn gradients)
-* Only the surface height channel
-* All 3 channels
-* With/without updating boundary conditions
-* Different sizes and frequency of water drops.
+- A single frame (one time-step)
+- 2 frames (in order to give the model the opportunity to learn gradients)
+- Only the surface height channel
+- All 3 channels
+- With/without updating boundary conditions
+- Different sizes and frequency of water drops.
 
 **The best performance occurred with 2 frames, all 3 channels, updating BC and
 using the highest grid resolution, meaning that there is no redundant
@@ -99,53 +99,53 @@ information at this point.**
 
 Base class for SmartFlow datasets
 
-* Both NCHW and NHWC formats are supported
-* Input frames have updated ghost cells, but labels don't (those cells will not
+- Both NCHW and NHWC formats are supported
+- Input frames have updated ghost cells, but labels don't (those cells will not
   be predicted). Therefore, after inference the prediction will be padded
   with ghost cells, before it is fed back to the model for the next prediction.
   Boundary conditions are required by the numerical scheme and can be easily
   evaluated upon inference, hopefully providing some valuable information to
   the model.
-* Time-steps at which a drop falls cannot be used as labels, because there is
+- Time-steps at which a drop fell cannot be used as labels, because there is
   no way to infer when and where a new drop will fall, using information from
   the previous state of the fluid. However, those frames can perfectly be used
   as input.
-* Data [augmentation]: Random flip, rotate and shuffle of the train batch.
+- Data [augmentation]: Random flip, rotate and shuffle of the train batch.
 
 ### [DSequence]
 
-* Used when training on GPU or when the dataset does not fit into the memory.
-* Derived from ```SmartFlowDS``` and ```keras.utils.Sequence```, in order to load one
+- Used when training on GPU or when the dataset does not fit into the memory.
+- Derived from ```SmartFlowDS``` and ```keras.utils.Sequence```, in order to load one
 batch at a time from a numpy memmap.
 
 ### [DSet]
 
-* This subclass is preferred when the dataset does fit into the memory or TPUs
+- This subclass is preferred when the dataset does fit into the memory or TPUs
 will be deployed on the google colab cloud.
-* Derived from ```SmartFlowDs``` and ```tf.data.Dataset```.
+- Derived from ```SmartFlowDs``` and ```tf.data.Dataset```.
 
 ## Preprocessing
 
 ### Normalization (mean - std)
 
-* On-devise, using the [normalization_layer()].
-* On dataset creation, using the [Normalizer] class, ​sacrificing portability in
+- On-devise, using the [normalization_layer()].
+- On dataset creation, using the [Normalizer] class, ​sacrificing portability in
   order to relieve the GPU while training.
 
 ### Stats type
 
-* Per frame or batch
-* Channelwise or using the whole volume
+- Per frame or batch
+- Channelwise or using the whole volume
 
 ### Visualization
 
 Checking that:
 
-* Flip and rotation orientation of input and ground truth are coherent.
-* Input dataset is shuffled.
-* Examples with new-drop-frames as labels are removed, because it is not
+- Flip and rotation orientation of input and ground truth are coherent.
+- Input dataset is shuffled.
+- Examples with new-drop-frames as labels are removed, because it is not
 possible to infer where and when a new drop will fall.
-* Input is normalized.
+- Input is normalized.
 
 <img src="media/preprocessing_visualization/it_00203_Flux-y.png" alt="preprocessing_visualization" width=800>
 
@@ -161,31 +161,31 @@ possible to infer where and when a new drop will fall.
 
 ### [Callbacks]
 
-* checkpoint
-* earlystopping
-* tensorboard
-* learning rate schedule
-* garbage collector
+- checkpoint
+- earlystopping
+- tensorboard
+- learning rate schedule
+- garbage collector
 
 ## Architectures
 
-* [Inception-v3]
-* [Inception-ResNet-v2]
-* [Inception-ResNet-like]
-* [ResNet]
-* [Simple CNN]
-* [Fully-Connected NN]
+- [Inception-v3]
+- [Inception-ResNet-v2]
+- [Inception-ResNet-like]
+- [ResNet]
+- [Simple CNN]
+- [Fully-Connected NN]
 
 ## Reference papers
 
-* He, K., Zhang, X., Ren, S., Sun, J. *Deep Residual Learning for Image
+- He, K., Zhang, X., Ren, S., Sun, J. *Deep Residual Learning for Image
   Recognition*. 2015. arXiv: [1512.03385].
-* Szegedy, S., Vanhoucke, V., Ioffe, S., Shlens, J., Wojna, Z. *Rethinking the
+- Szegedy, S., Vanhoucke, V., Ioffe, S., Shlens, J., Wojna, Z. *Rethinking the
   Inception Architecture for Computer Vision*. 2015. arXiv:[1512.00567].
-* Szegedy, C., Ioffe, S., Vanhoucke, V., Alemi, A.
+- Szegedy, C., Ioffe, S., Vanhoucke, V., Alemi, A.
   *Inception-v4, Inception-ResNet and the Impact of Residual Connections on
   Learning*. 2016. arXiv: [1512.00567].
-* Ioffe, S., Szegedy, C.
+- Ioffe, S., Szegedy, C.
   *Batch Normalization: Accelerating Deep Network Training by Reducing*
   *Internal Covariate Shift*. 2015. arXiv: [1502.03167].
 
