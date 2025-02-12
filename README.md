@@ -5,10 +5,11 @@ A Deep Learning solver for the Shallow Water Equations
 <br />
 
 SmartFlow is an extension of [MattFlow], which is a 2-stage [Runge-Kutta]
-numerical solver for the [Shallow Water Equations] (SWE)*. The project comprises
-the implementation of Deep Learning architectures out of the corresponding
-papers. The models are trained on data produced by MattFlow, aiming to predict
-the successive states of the fluid.
+numerical solver for the [Shallow Water Equations] (SWE)*. The project
+comprises the implementation of Deep Learning [architectures](#architectures)
+out of the corresponding [papers](#reference-papers). The models are trained
+on data produced by MattFlow, aiming to predict the successive states of the
+fluid.
 
 \*[SWE] is a Computational Fluid Dynamics (CFD) problem, which models the surface
 of the water via a coupled system of three hyperbolic Partial Differential
@@ -27,15 +28,27 @@ Equations (PDEs).
 
 ## Contents
 
-* [Install](#install)
-* [Input - Prediction - Ground Truth](#input---prediction---ground-truth-example)
-* [Dataset format](#dataset-format)
-* [Dataset types](#dataset-types)
-* [Preprocessing](#preprocessing)
-* [Model](#model)
-* [Architectures](#architectures)
-* [Reference papers](#reference-papers)
-* [License](#license)
+- [SmartFlow](#smartflow)
+  - [Contents](#contents)
+  - [Install](#install)
+  - [Input - Prediction - Ground Truth example](#input---prediction---ground-truth-example)
+  - [Dataset format](#dataset-format)
+    - [Input data scenarios](#input-data-scenarios)
+    - [Dataset Preview](#dataset-preview)
+  - [Dataset types](#dataset-types)
+    - [SmartFlowDS](#smartflowds)
+    - [DSequence](#dsequence)
+    - [DSet](#dset)
+  - [Preprocessing](#preprocessing)
+    - [Normalization (mean - std)](#normalization-mean---std)
+    - [Stats type](#stats-type)
+    - [Visualization](#visualization)
+  - [Model](#model)
+    - [Setup](#setup)
+    - [Callbacks](#callbacks)
+  - [Architectures](#architectures)
+  - [Reference papers](#reference-papers)
+  - [License](#license)
 
 ## Install
 
