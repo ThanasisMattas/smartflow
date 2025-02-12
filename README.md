@@ -62,7 +62,7 @@ git clone https://github.com/ThanasisMattas/smartflow.git
 
 ## Input - Prediction - Ground Truth example
 
-<img src="media/input-pred-gt_visualizations/it_00364.png" width=800>
+<img src="media/input-pred-gt_visualizations/it_00364.png" alt="input-pred-gt_visualizations" width=800>
 
 ## Dataset format
 
@@ -91,7 +91,7 @@ information at this point.**
 
 30 frames every 1000 frames
 
-<img src="media/dataset_preview.gif" width=400>
+<img src="media/dataset_preview.gif" alt="dataset_preview.gif" width=400>
 
 ## Dataset types
 
@@ -147,7 +147,7 @@ Checking that:
 possible to infer where and when a new drop will fall.
 * Input is normalized.
 
-<img src="media/preprocessing_visualization/it_00203_Flux-y.png" width=800>
+<img src="media/preprocessing_visualization/it_00203_Flux-y.png" alt="preprocessing_visualization" width=800>
 
 ## Model
 
